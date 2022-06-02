@@ -10,6 +10,7 @@ function solve() {
 
       const inputAsArr = JSON.parse(document.querySelector('textarea').value)
 
+
       let restaurants = {}
       let bestRestaurantObj = {}
       let highestAvgSalary = -Infinity
@@ -54,7 +55,7 @@ function solve() {
          }
 
          // now the restaurant is created/updated -> calculate their average and best salaries
-         let currentRestTotalSalary = -Infinity
+         let currentRestTotalSalary = 0
          let currentRestHighestSalary = -Infinity
          for (let worker of Object.values(restaurants[restName])) {
             currentRestTotalSalary += worker.workerSalary
@@ -62,16 +63,24 @@ function solve() {
                currentRestHighestSalary = worker.workerSalary
             }
          }
-         let currentRestAverageSalary = currentRestTotalSalary / restaurants[restName].length
+         // assign them to new properties so we can compare all restaurants after 
+         // (had an issue when a rest is assigned as best, i.e. highes salaries, then adding more workers on low salaries, it still remains top)
+         restaurants[restName].highestSalary = currentRestHighestSalary
+         restaurants[restName].averageSalary = currentRestTotalSalary / restaurants[restName].length
+      }
 
-         // find if it't the best restaurant so far, if yes, assign values
-         if (currentRestAverageSalary > highestAvgSalary) {
-            bestRestaurantObj = restaurants[restName]
-            bestRestaurantName = restName
-            highestAvgSalary = currentRestAverageSalary.toFixed(2)
-            highestSalaryInWinner = currentRestHighestSalary.toFixed(2)
+      // find if it's the best restaurant, if yes, assign values
+      for (let rest in restaurants) {
+         if (restaurants[rest].averageSalary > highestAvgSalary) {   // check avg salary for each restaurant
+            bestRestaurantObj = restaurants[rest].filter(a => typeof a == 'object')   // FILTER OUT ADDITIONAL DATA, LEAVE ONLY WORKERS
+            // console.log(bestRestaurantObj)
+            bestRestaurantName = rest
+            highestAvgSalary = restaurants[rest].averageSalary.toFixed(2)
+            highestSalaryInWinner = restaurants[rest].highestSalary.toFixed(2)
          }
       }
+
+
       // assign to HTML
       document.querySelector('#bestRestaurant p').textContent =
          `Name: ${bestRestaurantName} Average Salary: ${highestAvgSalary} Best Salary: ${highestSalaryInWinner}`
