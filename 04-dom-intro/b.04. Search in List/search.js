@@ -3,7 +3,7 @@ function search() {
    let searchTerm = document.getElementById('searchText').value;
    let counter = 0;
 
-   for (city of cities) {
+   for (let city of cities) {
       if (city.textContent.includes(searchTerm)) {
          counter++;
          city.style['font-weight'] = 'bold';
