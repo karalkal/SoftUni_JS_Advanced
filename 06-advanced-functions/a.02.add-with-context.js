@@ -1,5 +1,6 @@
 function solution(number) {
 
+    // you need to return a function which will add the new parameter to the one your function has        
     function addNumber(externalNumber) {
         return number + externalNumber
 
