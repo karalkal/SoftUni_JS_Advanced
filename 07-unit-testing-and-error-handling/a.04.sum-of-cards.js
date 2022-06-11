@@ -1,5 +1,0 @@
-function sum() {
-
-}
-
-sum()
