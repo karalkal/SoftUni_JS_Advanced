@@ -1,5 +1,5 @@
 function solve(face, suit) {
-    suits = {
+    let suits = {
         'S': '\u2660', // Spades (♠)
         'H': '\u2665', // Hearts (♥)
         'D': '\u2666', // Diamonds (♦)
@@ -10,12 +10,12 @@ function solve(face, suit) {
         throw new Error('Error')
     }
 
-    faces = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
+    let faces = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
     if (!faces.includes(face)) {
         throw new Error('Error')
     }
 
-    card = {
+    let card = {
         face: face,
         suit: suit,
         toString: () => {
