@@ -63,9 +63,8 @@ function solve() {
 
   function publishPost(event) {
     let article = event.target.parentElement.children[0]
-    event.target.parentElement.parentElement.remove()
-    // let approveBtn = event.target.parentElement.children[1]
-    // let editBtn = event.target.parentElement.children[2]
+    event.target.parentElement.parentElement.remove()   
+    
     let ulPublishEl = document.getElementById('published-list')
 
     let liElement = document.createElement('li')
@@ -86,13 +85,7 @@ function solve() {
 
     liElement.appendChild(articleElement)
 
-    ulPublishEl.appendChild(liElement)
-
-    // article.children[0].textContent = ''
-    // article.children[1].textContent = ''
-    // article.children[2].textContent = ''
-    // approveBtn.remove()
-    // editBtn.remove()
+    ulPublishEl.appendChild(liElement)    
 
     document.getElementById("clear-btn").addEventListener('click', clearPosts)
   }
