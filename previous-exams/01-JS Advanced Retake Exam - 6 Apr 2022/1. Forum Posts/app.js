@@ -41,7 +41,6 @@ function solve() {
 
       ulReviewEl.appendChild(liElement)
 
-
       titleField.value = ''
       categoryField.value = ''
       contentField.value = ''
