@@ -3,7 +3,7 @@ class Story {
     constructor(title, creator) {
         this.title = title
         this.creator = creator
-        this.comments = []
+        this._comments = []
         this._likes = []
     }
 
@@ -37,12 +37,12 @@ class Story {
     }
 
     comment(username, content, id) {
-        let foundComment = this.comments.find(cmnt => cmnt.id === id)
+        let foundComment = this._comments.find(cmnt => cmnt.id === id)
 
         // if no such comment exists (or if id arg is undefined as array will only contain comments with ids)
         // create it
         if (!foundComment) {
-            let newID = this.comments.length + 1
+            let newID = this._comments.length + 1
             let newComment = {
                 id: newID,
                 username,
@@ -50,7 +50,7 @@ class Story {
                 replies: []
             }
 
-            this.comments.push(newComment)
+            this._comments.push(newComment)
             return `${username} commented on ${this.title}`
         }
         // if exists, add reply to it
@@ -64,7 +64,7 @@ class Story {
         let result = `Title: ${this.title}\nCreator: ${this.creator}\nLikes: ${this._likes.length}\nComments:`
 
         if (sortingType === 'asc') {
-            for (let cmnt of this.comments) {
+            for (let cmnt of this._comments) {
                 result += `\n-- ${cmnt.id}. ${cmnt.username}: ${cmnt.content}`
 
                 for (let rpl of cmnt.replies) {
@@ -75,7 +75,7 @@ class Story {
 
         else if (sortingType === 'desc') {
             // sort comments
-            let sortedComments = this.comments
+            let sortedComments = this._comments
                 .sort((cmnt1, cmnt2) => cmnt2.id - cmnt1.id)
 
             for (let cmnt of sortedComments) {
@@ -97,7 +97,7 @@ class Story {
 
         else if (sortingType === 'username') {
             // sort comments
-            let sortedComments = this.comments
+            let sortedComments = this._comments
                 .sort((cmnt1, cmnt2) => cmnt1.username.localeCompare(cmnt2.username))
 
             for (let cmnt of sortedComments) {
@@ -119,7 +119,6 @@ class Story {
 
         return result
     }
-
 }
 
 
